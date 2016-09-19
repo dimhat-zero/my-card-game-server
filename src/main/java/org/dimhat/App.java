@@ -1,13 +1,19 @@
 package org.dimhat;
 
+import org.dimhat.hearthstone.GameManager;
+import org.dimhat.hearthstone.model.Player;
+
 /**
- * Hello world!
+ * 卡牌存在数据库
  *
  */
 public class App 
 {
     public static void main( String[] args )
     {
-        System.out.println( "Hello World!" );
+        GameManager manager = new GameManager();
+        Player player1 = new Player();
+        Player player2 = new Player();
+        manager.createOneGame(player1,player2);
     }
 }
