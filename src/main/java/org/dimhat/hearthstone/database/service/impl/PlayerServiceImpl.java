@@ -1,5 +1,6 @@
 package org.dimhat.hearthstone.database.service.impl;
 
+import org.dimhat.hearthstone.Contacts;
 import org.dimhat.hearthstone.database.dao.PlayerDao;
 import org.dimhat.hearthstone.database.entity.Tplayer;
 import org.dimhat.hearthstone.database.exception.BizException;
@@ -29,6 +30,7 @@ public class PlayerServiceImpl implements PlayerService {
     public Player register(String username, String password) {
         Tplayer player = new Tplayer();
         player.setUsername(username);
+        player.setMmr(Contacts.INIT_MMR);
         player.setPassword(encryptPassword(password));
         int insertCount = playerDao.save(player);
         if(insertCount<=0){

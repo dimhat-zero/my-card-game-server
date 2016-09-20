@@ -13,6 +13,8 @@ public class Tplayer {
 
     private String nickname;
 
+    private Integer mmr;
+
     public Long getId() {
         return id;
     }
@@ -45,6 +47,14 @@ public class Tplayer {
         this.nickname = nickname;
     }
 
+    public Integer getMmr() {
+        return mmr;
+    }
+
+    public void setMmr(Integer mmr) {
+        this.mmr = mmr;
+    }
+
     @Override
     public String toString() {
         final StringBuilder sb = new StringBuilder("Tplayer{");
@@ -52,6 +62,7 @@ public class Tplayer {
         sb.append(", username='").append(username).append('\'');
         sb.append(", password='").append(password).append('\'');
         sb.append(", nickname='").append(nickname).append('\'');
+        sb.append(", mmr=").append(mmr);
         sb.append('}');
         return sb.toString();
     }

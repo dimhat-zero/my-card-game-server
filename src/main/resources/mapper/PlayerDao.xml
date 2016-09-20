@@ -3,8 +3,8 @@
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="org.dimhat.hearthstone.database.dao.PlayerDao">
     <insert id="save">
-      insert ignore into player(username,password,nickname)
-      VALUES (#{username},#{password},#{nickname})
+      insert ignore into player(username,password,nickname,mmr)
+      VALUES (#{username},#{password},#{nickname},#{mmr})
     </insert>
 
     <update id="update" parameterType="Tplayer">

@@ -1,5 +1,7 @@
 package org.dimhat.hearthstone.database.entity;
 
+import static org.dimhat.hearthstone.model.Hero.hero;
+
 /**
  * 卡组表
  */
@@ -7,9 +9,19 @@ public class Tdeck {
 
     private Long id;
 
-    private String hero;
+    private Integer heroId;
 
     private Long playerId;
+
+    private String name;
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
 
     public Long getId() {
         return id;
@@ -19,12 +31,12 @@ public class Tdeck {
         this.id = id;
     }
 
-    public String getHero() {
-        return hero;
+    public Integer getHeroId() {
+        return heroId;
     }
 
-    public void setHero(String hero) {
-        this.hero = hero;
+    public void setHeroId(Integer heroId) {
+        this.heroId = heroId;
     }
 
     public Long getPlayerId() {
