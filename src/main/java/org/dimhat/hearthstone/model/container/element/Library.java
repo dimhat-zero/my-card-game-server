@@ -4,6 +4,7 @@ import org.dimhat.hearthstone.algorithm.FisherYatesShuffle;
 import org.dimhat.hearthstone.algorithm.Shuffle;
 import org.dimhat.hearthstone.model.card.Card;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -13,7 +14,7 @@ public class Library{
 
     private static Shuffle shuffle = new FisherYatesShuffle();
 
-    private List<Card> list;
+    private List<Card> list = new ArrayList<>();
 
     public boolean add(Card card){
         return list.add(card);

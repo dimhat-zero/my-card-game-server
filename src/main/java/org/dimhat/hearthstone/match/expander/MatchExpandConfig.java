@@ -15,6 +15,11 @@ public class MatchExpandConfig {
      */
     private int expandMatchRangeScore;
 
+    public MatchExpandConfig(int minMatchDifficultTimes, int expandMatchRangeScore) {
+        this.minMatchDifficultTimes = minMatchDifficultTimes;
+        this.expandMatchRangeScore = expandMatchRangeScore;
+    }
+
     public int getMinMatchDifficultTimes() {
         return minMatchDifficultTimes;
     }

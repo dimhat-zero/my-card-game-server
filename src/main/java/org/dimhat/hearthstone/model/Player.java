@@ -23,6 +23,8 @@ public class Player {
     /*当前使用卡组*/
     private Deck deck;
 
+    private Integer mmr;
+
     /*全部卡组*/
     private List<Deck> decks;
 
@@ -74,6 +76,14 @@ public class Player {
         this.decks = decks;
     }
 
+    public Integer getMmr() {
+        return mmr;
+    }
+
+    public void setMmr(Integer mmr) {
+        this.mmr = mmr;
+    }
+
     @Override
     public String toString() {
         final StringBuilder sb = new StringBuilder("Player{");
@@ -82,6 +92,8 @@ public class Player {
         sb.append(", password='").append(password).append('\'');
         sb.append(", nickname='").append(nickname).append('\'');
         sb.append(", deck=").append(deck);
+        sb.append(", mmr=").append(mmr);
+        sb.append(", decks=").append(decks);
         sb.append('}');
         return sb.toString();
     }

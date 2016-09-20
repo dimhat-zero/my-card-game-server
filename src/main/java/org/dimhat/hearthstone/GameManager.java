@@ -5,6 +5,8 @@ import org.dimhat.hearthstone.model.Player;
 import org.dimhat.hearthstone.model.container.Deck;
 import org.dimhat.hearthstone.model.container.Domain;
 import org.dimhat.hearthstone.model.container.OneGame;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -16,6 +18,7 @@ public class GameManager {
 
     private Map<String,OneGame> map = new HashMap<>();
 
+    private final Logger logger = LoggerFactory.getLogger(this.getClass());
 
     /**
      * 两个玩家产生一局游戏
@@ -34,6 +37,7 @@ public class GameManager {
         oneGame.setDomain2(createDomain(player2.getDeck()));
 
         this.initGameConfig(oneGame);
+        logger.debug("开始游戏！");
         return oneGame;
     }
 

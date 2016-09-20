@@ -1,5 +1,8 @@
 package org.dimhat.hearthstone.match;
 
+import org.dimhat.hearthstone.model.Player;
+
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -8,9 +11,20 @@ import java.util.List;
 public class MatchTask {
     private long startTime;//开始时间
     private int matchCount=0;//已经匹配次数
-    private List<Integer> matchRangeRecords;//匹配范围区域
+    private List<Integer> matchRangeRecords = new ArrayList<>();//匹配范围区域
     private int mmr;//匹配分
     private boolean isActive=true;//是否可用
+
+    private Player player;//玩家
+
+    public Player getPlayer() {
+        return player;
+    }
+
+    public MatchTask(Player player) {
+        this.player = player;
+        this.mmr = player.getMmr();
+    }
 
     public int compareTo(MatchTask task) {
         return mmr - task.getMmr();
@@ -19,11 +33,6 @@ public class MatchTask {
     public int getMmr() {
         return mmr;
     }
-
-    public void setMmr(int mmr) {
-        this.mmr = mmr;
-    }
-
 
     public void setStartTime(long startTime) {
         this.startTime = startTime;
@@ -46,7 +55,11 @@ public class MatchTask {
      */
     public void addMatchRangeRecords(int score) {
         int size = matchRangeRecords.size();
-        matchRangeRecords.add(matchRangeRecords.get(size-1)+score);
+        int maxRecord = score;
+        if(size!=0){
+            maxRecord += matchRangeRecords.get(size-1);
+        }
+        matchRangeRecords.add(maxRecord);
     }
 
     /**
@@ -60,4 +73,20 @@ public class MatchTask {
         isActive = false;
     }
 
+
+    @Override
+    public String toString() {
+        final StringBuilder sb = new StringBuilder("MatchTask{");
+        sb.append("startTime=").append(startTime);
+        sb.append(", matchCount=").append(matchCount);
+        sb.append(", matchRangeRecords=").append(matchRangeRecords);
+        sb.append(", mmr=").append(mmr);
+        sb.append(", player=").append(player.getId());
+        sb.append('}');
+        return sb.toString();
+    }
+
+    public String simple(){
+        return "{player="+player.getId()+",mmr="+mmr+",count="+matchCount+"}";
+    }
 }

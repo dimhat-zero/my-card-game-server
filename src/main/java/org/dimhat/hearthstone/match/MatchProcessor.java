@@ -59,6 +59,7 @@ public class MatchProcessor implements Runnable {
     public void submitMatch(MatchTask task) {
         try {
             task.setStartTime(System.currentTimeMillis());
+            logger.debug("匹配器收到任务：{}",task.simple());
             waitAddTaskQueue.put(task);
         } catch (InterruptedException e) {
             e.printStackTrace();
@@ -107,6 +108,7 @@ public class MatchProcessor implements Runnable {
      * 返回匹配成功的任务
      */
     protected MatchTask matchTask(MatchTask task) {
+        logger.debug("匹配器开始匹配任务{}",task);
         task.incrementMatchCount();
         expandMatchRange(task);
         List<Integer> matchRangeRecords = task.getMatchRangeRecords();
@@ -127,6 +129,7 @@ public class MatchProcessor implements Runnable {
                         totalMatched = totalMatched + 2;
                         getTaskQueue().remove();// 匹配成功则移除头（task）并且移除position（匹配成功对象）
                         iterator.remove();
+                        logger.debug("匹配成功，出队列成功。cpr：{} record:{}",Math.abs(cpr),record);
                         return position;
                     }
                 }
@@ -161,12 +164,12 @@ public class MatchProcessor implements Runnable {
             this.workThread = Thread.currentThread();
             //填充匹配队列
             fillTaskQueue();
-            MatchTask task = getTaskQueue().peek();
+            MatchTask task = getTaskQueue().peek();//山峰不出队列
             if (task == null) {
                 return;
             }
             if (!task.isActive()) {// 判断task是否失效
-                getTaskQueue().remove();
+                getTaskQueue().remove();//山峰出队列
                 return;
             }
 
@@ -175,11 +178,7 @@ public class MatchProcessor implements Runnable {
                 // 未匹配成功，则将头移到尾部
                 headToTail();
             } else {
-                int remain = 0;
-                for (MatchTask t : getTaskQueue()) {
-                    remain = remain + 1;
-                }
-                logger.debug("Complete a team match ( remain = {} ,totalMatched = {} )",remain,totalMatched);
+                logger.debug("Complete a team match ( remain = {} ,totalMatched = {} )",getTaskQueue().size(),totalMatched);
             }
 
         } catch (Exception e) {

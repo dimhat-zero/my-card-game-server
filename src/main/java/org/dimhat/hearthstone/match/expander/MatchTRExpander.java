@@ -17,8 +17,6 @@ public class MatchTRExpander implements RangeExpander {
         this.expandMatchRangeScore = matchExpandConfig.getExpandMatchRangeScore();
     }
 
-    private static int rank = 25;//25分
-
     /**
      * 判断匹配是否困难
      */
